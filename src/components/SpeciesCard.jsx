@@ -44,7 +44,9 @@ export default function SpeciesCard({ species, scoreData, onExplain, delay = 0 }
   return (
     <article
       className={`relative bg-surface border border-edge rounded-2xl p-5 opacity-0 animate-fadeIn ${pulse}`}
-      style={{ animationDelay: `${delay}ms`, animationFillMode: 'both' }}
+      // Both animate-* utilities set the `animation` shorthand, so whichever
+      // wins in the cascade cancels the other — compose them inline instead.
+      style={{ animation: `fadeIn 400ms ease-out ${delay}ms both${pulse ? ', glowPulse 2s ease-in-out infinite' : ''}` }}
       aria-label={`Bite score: ${score} out of 100, ${label}`}
     >
       <header className="flex items-center justify-between mb-2">
