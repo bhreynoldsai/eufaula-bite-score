@@ -34,7 +34,7 @@ export default function BiteExplanation({ open, onClose, args }) {
       <div className="bg-surface border border-edge rounded-2xl w-full max-w-xl max-h-[85vh] overflow-y-auto shadow-2xl">
         <header className="flex items-center justify-between px-5 py-3 border-b border-edge sticky top-0 bg-surface">
           <div className="flex items-center gap-3">
-            <GuideAvatar size={48} />
+            <GuideAvatar size={72} />
             <div>
               <h3 className="font-display text-lg font-semibold text-heading uppercase tracking-wide">
                 {args?.species} · The Guide's Read

@@ -159,9 +159,9 @@ export default function App() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-baseline justify-between flex-wrap gap-2 mb-3">
             <div className="flex items-center gap-3">
-              <GuideAvatar size={40} hideIfMissing />
+              <GuideAvatar size={72} hideIfMissing />
               <h1 className="font-display text-2xl sm:text-3xl font-bold text-heading uppercase tracking-wider">
-                Eufaula <span className="text-accent">Bite Score</span>
+                Danny's <span className="text-accent">Eufaula Bites</span>
               </h1>
             </div>
             <div className="text-xs text-body/70">
