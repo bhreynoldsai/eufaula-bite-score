@@ -150,6 +150,22 @@ export default function App() {
         </div>
       </header>
 
+      {/* ---------- LEGISLATIVE UPDATE BANNER ---------- */}
+      <div className="border-b border-rural/40 bg-rural">
+        <div className="mx-auto flex max-w-6xl items-start gap-2 px-6 py-2.5 text-[#EFEBDD]">
+          <Landmark className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+          <p className="text-xs leading-relaxed">
+            <span className="font-bold uppercase tracking-wide text-gold">2025–26 legislative update:</span>{" "}
+            The <strong>One Big Beautiful Bill Act (2025)</strong> permanently expanded LIHTC (9% ceiling +12%,
+            4% bond test cut to 25%), and the <strong>21st Century ROAD to Housing Act</strong> (enacted July 11, 2026)
+            reformed USDA rural preservation, HOME, CDBG, and vouchers — and added new programs (RCDI, MPR, PRICE,
+            FHA small-dollar &amp; whole-home repair pilots). Look for the{" "}
+            <span className="rounded-full bg-rural px-1.5 py-0.5 text-[10px] font-bold uppercase ring-1 ring-[#EFEBDD]/50">New · 2026 Law</span>{" "}
+            and <span className="font-semibold">Updated by Law</span> tags. Verify appropriations before citing figures.
+          </p>
+        </div>
+      </div>
+
       {/* ---------- SEARCH BAR ---------- */}
       <div className="border-b border-[#DED7C4] bg-[#EFEBDD]">
         <div className="mx-auto max-w-6xl px-6 py-5">
@@ -310,6 +326,16 @@ export default function App() {
                           HUB Priority Fit
                         </span>
                       )}
+                      {p.newLaw && (
+                        <span className="rounded-full bg-rural px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#EFEBDD]">
+                          New · 2026 Law
+                        </span>
+                      )}
+                      {!p.newLaw && p.legislativeUpdate && (
+                        <span className="rounded-full border border-rural px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-rural">
+                          Updated by Law
+                        </span>
+                      )}
                     </div>
                     <h3 className="mt-1 text-base font-semibold text-[#1B2430] group-hover:text-navy">
                       {p.name}
@@ -405,6 +431,16 @@ export default function App() {
               </div>
 
               <p className="text-[#1B2430]">{active.description}</p>
+
+              {active.legislativeUpdate && (
+                <div className="flex items-start gap-2 rounded-sm border-l-4 border-rural bg-[#EFEBDD] px-3 py-2.5 text-xs text-[#3F4A36]">
+                  <Landmark className="mt-0.5 h-3.5 w-3.5 shrink-0 text-rural" />
+                  <div>
+                    <span className="font-semibold uppercase tracking-wide text-rural">Legislative update.</span>{" "}
+                    {active.legislativeUpdate}
+                  </div>
+                </div>
+              )}
 
               {active.verifyNote && (
                 <div className="flex items-start gap-2 rounded-sm border border-[#C7BEA0] bg-white px-3 py-2 text-xs text-[#6B6552]">
