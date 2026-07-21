@@ -105,10 +105,12 @@ export const PROGRAMS = [
     funding: "Rent subsidy covering the gap to 30% of household income",
     eligibility: "Tenants in USDA Section 515/514 financed rural rental properties.",
     description:
-      "Rental assistance paid to owners of USDA-financed rural rental housing on behalf of low-income tenants, similar in structure to HUD Section 8.",
+      "Rental assistance paid to owners of USDA-financed rural rental housing on behalf of low-income tenants, similar in structure to HUD Section 8. The 21st Century ROAD to Housing Act (enacted July 11, 2026) made permanent the decoupling of §521 rental assistance from maturing §514/§515 mortgages — preventing the loss of assistance when the underlying loan matures.",
     link: "https://www.rd.usda.gov/programs-services/multi-family-housing-rental-assistance",
     sourceUrl: "https://www.rd.usda.gov/programs-services/multi-family-housing-rental-assistance",
-    lastVerified: "2026-07-20",
+    lastVerified: "2026-07-21",
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): permanent §521 RA decoupling from maturing §514/§515 mortgages, addressing ~137,000 rural units at risk of losing assistance between 2023–2033.",
   },
   {
     id: "usda-523",
@@ -190,10 +192,12 @@ export const PROGRAMS = [
     eligibility:
       "Principal cities of metro areas, cities 50,000+, and urban counties 200,000+ (qualify automatically as HUD 'entitlement communities').",
     description:
-      "Flexible formula funding for housing rehab, infrastructure, and community development, distributed directly to larger cities and urban counties.",
+      "Flexible formula funding for housing rehab, infrastructure, and community development, distributed directly to larger cities and urban counties. The 21st Century ROAD to Housing Act (2026) now expressly allows CDBG to fund new affordable-housing construction, ties a portion of funding to housing production (bonuses for accelerated homebuilding, small reductions for lagging grantees), and requires grantees to publish a searchable database of undeveloped parcels they own.",
     link: "https://www.hud.gov/program_offices/comm_planning/cdbg/entitlement",
     sourceUrl: "https://www.hud.gov/program_offices/comm_planning/cdbg/entitlement",
-    lastVerified: "2026-07-20",
+    lastVerified: "2026-07-21",
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): CDBG may now fund new affordable-housing construction; production-tied funding bonuses/penalties; mandatory public database of grantee-owned undeveloped parcels.",
   },
   {
     id: "hud-cdbg-state",
@@ -222,10 +226,12 @@ export const PROGRAMS = [
     funding: "Formula grants; GA non-entitlement areas apply via DCA's CHIP",
     eligibility: "Participating jurisdictions (cities/counties/states); ultimate beneficiaries are low-income households.",
     description:
-      "The largest federal block grant for affordable housing — funds new construction, rehab, homebuyer assistance, tenant-based rental assistance, and CHDO (nonprofit) set-asides.",
+      "The largest federal block grant for affordable housing — funds new construction, rehab, homebuyer assistance, tenant-based rental assistance, and CHDO (nonprofit) set-asides. The 21st Century ROAD to Housing Act (2026) reauthorized HOME with administrative reforms — expanded eligibility and greater flexibility to use HOME funds for housing-related infrastructure.",
     link: "https://www.hud.gov/program_offices/comm_planning/home",
     sourceUrl: "https://www.hud.gov/program_offices/comm_planning/home",
-    lastVerified: "2026-07-20",
+    lastVerified: "2026-07-21",
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): reauthorized HOME with production-focused reforms — expanded eligibility and flexibility to fund housing-related infrastructure.",
   },
   {
     id: "hud-htf",
@@ -321,10 +327,12 @@ export const PROGRAMS = [
     funding: "Tenant-based rental subsidy administered by local PHAs",
     eligibility: "Very-low-income households, administered through local Public Housing Authorities.",
     description:
-      "The core federal rental subsidy program, closing the gap between 30% of household income and market rent.",
+      "The core federal rental subsidy program, closing the gap between 30% of household income and market rent. Under the 21st Century ROAD to Housing Act (2026), units already financed through LIHTC, HOME, or USDA Rural Housing Service that passed an inspection within the past year automatically satisfy the HCV inspection requirement — reducing lease-up delays.",
     link: "https://www.hud.gov/hcv",
     sourceUrl: "https://www.hud.gov/hcv",
-    lastVerified: "2026-07-20",
+    lastVerified: "2026-07-21",
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): LIHTC/HOME/USDA units passing an inspection in the past year auto-satisfy HCV inspection requirements.",
   },
   {
     id: "hud-lead",
@@ -402,14 +410,17 @@ export const PROGRAMS = [
     level: "Federal (State-allocated)",
     area: ["Urban", "Rural"],
     category: "Tax Credit & Capital",
-    funding: "9% and 4% credits allocated annually; leverages private equity",
+    funding: "9% and 4% credits allocated annually; leverages private equity. OBBBA (2025): permanent 12% increase to the 9% state ceiling from CY2026, and the 4% bond-financing test permanently cut from 50% to 25% of aggregate basis.",
     eligibility:
       "Developers of qualified affordable rental housing; state housing credit agency (Georgia: DCA) allocates credits via QAP.",
     description:
-      "The single largest driver of affordable rental housing production nationally, generating equity through the sale of federal tax credits to investors.",
+      "The single largest driver of affordable rental housing production nationally, generating equity through the sale of federal tax credits to investors. The One Big Beautiful Bill Act (signed July 4, 2025) permanently boosted the 9% allocation by 12% and lowered the private-activity-bond threshold for 4% credits from 50% to 25% of aggregate basis — the latter makes far more 4%/bond deals feasible in smaller rural and small-city markets. Novogradac estimates the LIHTC changes could finance ~527,000 additional homes over 2026–2035.",
     link: "https://www.dca.ga.gov/community-economic-development/funding-programs/low-income-housing-tax-credit-lihtc-program",
     sourceUrl: "https://www.dca.ga.gov/community-economic-development/funding-programs/low-income-housing-tax-credit-lihtc-program",
-    lastVerified: "2026-07-20",
+    lastVerified: "2026-07-21",
+    verifyNote: true,
+    legislativeUpdate:
+      "One Big Beautiful Bill Act (2025): permanent +12% to the 9% credit ceiling (from CY2026) and 4% bond-financing test cut 50%→25% of aggregate basis. Note: a proposed 30% LIHTC basis boost for rural/Tribal areas was dropped from the final law.",
   },
   {
     id: "cdfi-cmf",
@@ -565,6 +576,113 @@ export const PROGRAMS = [
     link: "https://ded.mo.gov/about/missouri-housing-development-commission",
     sourceUrl: "https://ded.mo.gov/about/missouri-housing-development-commission",
     lastVerified: "2026-07-20",
+  },
+
+  // ---------------- NEW / EXPANDED BY 2025–2026 LEGISLATION ----------------
+  // Added following the One Big Beautiful Bill Act (2025) and the 21st Century
+  // ROAD to Housing Act (enacted July 11, 2026). Several of these are newly
+  // AUTHORIZED but depend on annual appropriations for funding levels — confirm
+  // current NOFO/appropriation status with the administering agency before
+  // citing dollar figures in a proposal.
+  {
+    id: "usda-mpr",
+    code: "USDA RD — MPR/HPR",
+    name: "Multifamily Housing Preservation & Revitalization (MPR)",
+    agency: "USDA Rural Development",
+    level: "Federal",
+    area: ["Rural"],
+    category: "Rental & Multifamily",
+    funding: "Loans, grants, and debt deferrals to restructure and preserve aging §515/§514 rural rental properties (appropriated annually)",
+    eligibility: "Owners of existing USDA §515/§514 financed rural multifamily rental housing seeking to preserve affordability.",
+    description:
+      "The Multifamily Preservation & Revitalization program restructures and recapitalizes aging USDA rural rental housing to keep it affordable. Run as an appropriations-based demonstration since FY2006, it was made a permanent, authorized program by the 21st Century ROAD to Housing Act (2026) — a core tool for preventing the loss of rural rental stock as §515 loans mature.",
+    link: "https://www.rd.usda.gov/programs-services/multi-family-housing-programs",
+    sourceUrl: "https://www.carh.org/21st-century-road-to-housing-ace-becomes-law/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): made the previously demonstration-only MPR program permanent.",
+  },
+  {
+    id: "usda-rcdi",
+    code: "USDA RD — RCDI",
+    name: "Rural Community Development Initiative (RCDI)",
+    agency: "USDA Rural Development",
+    level: "Federal",
+    area: ["Rural"],
+    category: "Capacity Building",
+    funding: "Capacity-building grants to intermediary organizations that re-grant technical assistance to local rural recipients (appropriated annually)",
+    eligibility:
+      "Qualified public, nonprofit, and tribal intermediary organizations that build the capacity of local rural nonprofits, low-income communities, and federally recognized tribes — a strong structural fit for a Rural Prosperity HUB.",
+    description:
+      "RCDI funds intermediary organizations to provide technical assistance and training that builds the housing, community-facility, and economic-development capacity of rural recipients. Long funded only through annual appropriations, it was formally authorized by the 21st Century ROAD to Housing Act (2026). Closely parallels HUD's Rural Capacity Building program and fits the HUB / intermediary model.",
+    link: "https://www.rd.usda.gov/programs-services/community-economic-development/rural-community-development-initiative-grants",
+    sourceUrl: "https://bipartisanpolicy.org/explainer/whats-in-the-21st-century-road-to-housing-act/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    flagship: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): formally authorized RCDI (previously appropriations-only).",
+  },
+  {
+    id: "hud-price",
+    code: "HUD — PRICE",
+    name: "Preservation & Reinvestment Initiative for Community Enhancement (PRICE)",
+    agency: "HUD",
+    level: "Federal",
+    area: ["Rural", "Urban"],
+    category: "Home Repair & Rehab",
+    funding: "Competitive grants to repair, preserve, and improve manufactured homes and manufactured-home communities (appropriated annually)",
+    eligibility:
+      "States, local governments, tribes, resident-owned manufactured-home communities, nonprofits, and cooperatives.",
+    description:
+      "PRICE grants fund the repair, resilience, replacement, and preservation of manufactured housing and manufactured-home communities — a large share of unsubsidized affordable housing in rural areas. The 21st Century ROAD to Housing Act (2026) reauthorized PRICE and paired it with manufactured-housing reforms (removal of the permanent-chassis requirement, HUD energy standards, higher FHA Title I loan limits).",
+    link: "https://www.hud.gov/program_offices/comm_planning/price",
+    sourceUrl: "https://bipartisanpolicy.org/explainer/whats-in-the-21st-century-road-to-housing-act/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): reauthorized PRICE manufactured-housing grants; removed the permanent-chassis requirement and set HUD energy standards.",
+  },
+  {
+    id: "fha-small-dollar-pilot",
+    code: "FHA — Small-Dollar Pilot",
+    name: "FHA Small-Dollar Mortgage Pilot",
+    agency: "HUD / Federal Housing Administration",
+    level: "Federal",
+    area: ["Rural", "Urban"],
+    category: "Homeownership",
+    funding: "Competitive grants to expand access to FHA-insured mortgages under $100,000 (4-year pilot, sunsets ~2030)",
+    eligibility:
+      "Entities selected competitively by HUD to expand small-dollar mortgage lending — critical in lower-cost rural and small-town markets where sub-$100K homes are hard to finance.",
+    description:
+      "A new pilot created by the 21st Century ROAD to Housing Act (2026) to expand access to small-dollar (under $100,000) FHA-backed mortgages, which are chronically underserved by lenders despite being the entry-level ownership stock in many rural communities. Authorized as a four-year pilot.",
+    link: "https://www.hud.gov/federal_housing_administration",
+    sourceUrl: "https://bipartisanpolicy.org/explainer/whats-in-the-21st-century-road-to-housing-act/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): created a 4-year FHA small-dollar (<$100K) mortgage pilot.",
+  },
+  {
+    id: "hud-whole-home-repair-pilot",
+    code: "HUD — Whole-Home Repair",
+    name: "Whole-Home Repair Pilot Program",
+    agency: "HUD",
+    level: "Federal",
+    area: ["Rural", "Urban"],
+    category: "Home Repair & Rehab",
+    funding: "Grants to state, local, and tribal governments, which provide grants and forgivable loans to homeowners and small landlords for home repairs and modifications",
+    eligibility:
+      "State, local, and tribal governments (pass-through to homeowners and small landlords); complements USDA §504/§533 rural repair programs.",
+    description:
+      "A new HUD pilot established by the 21st Century ROAD to Housing Act (2026) to support state, local, and tribal whole-home repair programs — funding grants and forgivable loans for repairs, weatherization, and accessibility modifications. Overlaps usefully with USDA §504 repair loans/grants and §533 Housing Preservation Grants for rural homeowners.",
+    link: "https://www.hud.gov/program_offices/comm_planning",
+    sourceUrl: "https://bipartisanpolicy.org/explainer/whats-in-the-21st-century-road-to-housing-act/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): created a whole-home repair pilot (grants + forgivable loans via state/local/tribal programs).",
   },
 ];
 
