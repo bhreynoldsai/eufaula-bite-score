@@ -684,6 +684,104 @@ export const PROGRAMS = [
     legislativeUpdate:
       "21st Century ROAD to Housing Act (2026): created a whole-home repair pilot (grants + forgivable loans via state/local/tribal programs).",
   },
+  {
+    id: "hud-preapproved-designs",
+    code: "HUD ROAD §213",
+    name: "Pre-Approved Housing Designs Pilot",
+    agency: "HUD",
+    level: "Federal",
+    area: ["Rural", "Urban"],
+    category: "Community Development",
+    funding: "Competitive grants to local governments and tribes to adopt and implement pre-reviewed housing designs; 10% of funding reserved for rural areas (5-year adoption window)",
+    eligibility:
+      "Local governments and tribes in CDBG participating jurisdictions that adopt pre-approved designs (ADUs, duplexes, townhouses) to streamline permitting and construction.",
+    description:
+      "A new pilot (Section 213) that funds local governments and tribes to select and implement pre-reviewed 'shovel-ready' housing designs — accessory dwelling units, duplexes, townhouses — to cut permitting time and speed affordable construction. Ten percent of funding is reserved for rural areas.",
+    link: "https://www.hud.gov/program_offices/comm_planning",
+    sourceUrl: "https://bipartisanpolicy.org/explainer/whats-in-the-21st-century-road-to-housing-act/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026), §213: new pilot for pre-approved housing designs, with a 10% rural set-aside.",
+  },
+  {
+    id: "hud-single-stair-pilot",
+    code: "HUD ROAD — Single-Stair",
+    name: "Single-Stair Multifamily Building Pilot",
+    agency: "HUD",
+    level: "Federal",
+    area: ["Urban"],
+    category: "Community Development",
+    funding: "Competitive grants for pilot projects testing the safety, feasibility, and effectiveness of single-stairway residential buildings up to six stories (7-year sunset)",
+    eligibility:
+      "States, tribes, territories, and localities piloting single-stair (single internal stairway) mid-rise residential buildings; HUD also issues enabling guidelines.",
+    description:
+      "A new HUD pilot created by the 21st Century ROAD to Housing Act (2026) directing HUD to establish guidelines and award competitive grants to test single-stair residential buildings up to six stories — a code reform that can unlock more efficient small-lot and infill multifamily housing. Sunsets after seven years.",
+    link: "https://www.hud.gov/program_offices/comm_planning",
+    sourceUrl: "https://bipartisanpolicy.org/hub/21st-century-road-to-housing-act-implementation-tracker/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): new single-stair (up to 6 stories) building pilot and HUD guidelines; 7-year sunset.",
+  },
+  {
+    id: "hud-esg",
+    code: "HUD CFDA 14.231",
+    name: "Emergency Solutions Grants (ESG)",
+    agency: "HUD (via State — GA: DCA)",
+    level: "Federal (State-administered)",
+    area: ["Urban", "Rural"],
+    category: "Homelessness & Vouchers",
+    funding: "Formula grants to states, large cities/counties, and territories for shelter, street outreach, rapid re-housing, and homelessness prevention",
+    eligibility:
+      "States and eligible local governments (which subgrant to nonprofits); serves people experiencing or at risk of homelessness.",
+    description:
+      "The core federal formula grant for emergency shelter, street outreach, rapid re-housing, and homelessness prevention. The 21st Century ROAD to Housing Act (2026), §505, lets ESG recipients request a waiver of the statutory 60% spending cap on emergency shelter and street outreach — giving rural and high-need grantees more flexibility.",
+    link: "https://www.hudexchange.info/programs/esg/",
+    sourceUrl: "https://bipartisanpolicy.org/hub/21st-century-road-to-housing-act-implementation-tracker/",
+    lastVerified: "2026-07-21",
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026), §505: ESG recipients may request a waiver of the 60% cap on emergency shelter and street outreach spending.",
+  },
+  {
+    id: "hud-fss",
+    code: "HUD CFDA 14.896",
+    name: "Family Self-Sufficiency (FSS) Program",
+    agency: "HUD",
+    level: "Federal",
+    area: ["Urban", "Rural"],
+    category: "Homelessness & Vouchers",
+    funding: "Grants to PHAs and multifamily owners for FSS coordinators; participants build an interest-bearing escrow account as earnings rise",
+    eligibility:
+      "Housing Choice Voucher, public housing, and eligible project-based rental-assistance households enrolled by their PHA or owner.",
+    description:
+      "FSS pairs rental assistance with case management and an escrow savings account that grows as a participant's earned income rises, supporting a path off subsidy. The 21st Century ROAD to Housing Act (2026) authorizes a multi-year demonstration testing an opt-out (auto-enroll) approach and other program changes to boost participation.",
+    link: "https://www.hud.gov/program_offices/public_indian_housing/programs/hcv/fss",
+    sourceUrl: "https://bipartisanpolicy.org/hub/21st-century-road-to-housing-act-implementation-tracker/",
+    lastVerified: "2026-07-21",
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026): authorizes a multi-year FSS demonstration testing an opt-out (auto-enroll) design.",
+  },
+  {
+    id: "hud-mtw-cohort",
+    code: "HUD ROAD §504",
+    name: "Moving to Work — Economic Opportunity & Pathways to Independence Cohort",
+    agency: "HUD",
+    level: "Federal",
+    area: ["Urban", "Rural"],
+    category: "Homelessness & Vouchers",
+    funding: "Regulatory flexibility (fungible use of voucher, public-housing, and capital funds) for a new cohort of designated public housing agencies",
+    eligibility:
+      "Public Housing Authorities selected into the new Moving to Work cohort, with specific eligibility and reporting requirements.",
+    description:
+      "The 21st Century ROAD to Housing Act (2026), §504, authorizes a new Moving to Work cohort — the Economic Opportunity and Pathways to Independence Cohort — expanding the number of PHAs allowed to test flexible, locally designed approaches to self-sufficiency and housing assistance.",
+    link: "https://www.hud.gov/program_offices/public_indian_housing/programs/ph/mtw",
+    sourceUrl: "https://bipartisanpolicy.org/hub/21st-century-road-to-housing-act-implementation-tracker/",
+    lastVerified: "2026-07-21",
+    newLaw: true,
+    legislativeUpdate:
+      "21st Century ROAD to Housing Act (2026), §504: authorized a new Moving to Work 'Economic Opportunity and Pathways to Independence' PHA cohort.",
+  },
 ];
 
 /* Illustrative list of Georgia HUD entitlement jurisdictions (receive CDBG/HOME
