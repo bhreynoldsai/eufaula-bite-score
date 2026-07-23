@@ -46,3 +46,45 @@ npm run build    # outputs dist/
 - **Vercel / Netlify**: import the repo — `vercel.json` / `netlify.toml` are
   already configured.
 - Any static host: upload `dist/` with an SPA fallback to `index.html`.
+
+---
+
+## Capitol Trades — Congressional stock-trade tracker
+
+A second, self-contained dashboard lives in this repo at **`/congress.html`**
+(`npm run dev` → http://localhost:5173/congress.html). It tracks the stock
+transactions members of the U.S. Congress must disclose under the **STOCK Act**
+(periodic transaction reports), and renders:
+
+- **KPIs** — trade count, estimated volume (sum of disclosure-bracket
+  midpoints), unique members/tickers, buy-vs-sell split, and average
+  disclosure lag (with a late-filing rate).
+- **Charts** — volume over time (buys vs sells), most-traded tickers, party
+  split, and buy/sell direction (Recharts).
+- **Filters** — free-text search plus party, chamber, direction, ticker, and
+  date-range.
+- **Sortable transactions table** and a **most-active-traders leaderboard**;
+  clicking any member opens a detail drawer with their full trade history.
+
+### Data source
+
+The dashboard ships with a **bundled sample dataset**
+(`src/congress/data/seedTrades.json`) so it is fully functional offline — the
+members and tickers are real, but the individual transactions are synthetic and
+labelled *Sample data* in the UI. Regenerate it with:
+
+```bash
+node src/congress/data/generate.mjs
+```
+
+At runtime the app also attempts to fetch **live** disclosure feeds *in the
+browser* (see `DEFAULT_SOURCES` in `src/congress/hooks/useCongressTrades.js`).
+Any feed returning an array of periodic-transaction records — the House/Senate
+"stock watcher" JSON shape is normalized automatically — works. Point it at a
+reachable feed without rebuilding:
+
+- add `?dataUrl=https://…/all_transactions.json` to the URL, or
+- set `window.CONGRESS_DATA_URL = 'https://…'` before the app loads.
+
+If no live feed is reachable, the dashboard falls back to the bundled sample
+data and flags the source in the header.
