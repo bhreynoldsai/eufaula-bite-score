@@ -2,21 +2,30 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import seed from '../data/seedTrades.json';
 import { normalizeMany } from '../data/normalize.js';
 
-// Live data is fetched in the *user's browser* at runtime, so it is not subject
-// to any build-time egress policy. Point these at any reachable feed that
-// returns an array of periodic-transaction records (the House/Senate
-// "stock watcher" JSON shape is normalized automatically). Override without a
-// rebuild via `?dataUrl=<url>` in the address bar or `window.CONGRESS_DATA_URL`.
-export const DEFAULT_SOURCES = [
-  {
-    url: 'https://house-stock-watcher-data.s3-us-west-2.amazonaws.com/data/all_transactions.json',
-    chamber: 'House',
-  },
-  {
-    url: 'https://senate-stock-watcher-data.s3-us-west-2.amazonaws.com/aggregate/all_transactions.json',
-    chamber: 'Senate',
-  },
-];
+// Live data is fetched in the *user's browser* at runtime. The normalizer
+// understands the response shapes of every source in SOURCE_PRESETS below, so a
+// feed just has to return an array (or {data|transactions:[...]}) of records.
+//
+// There is deliberately NO keyless default feed: the formerly free House/Senate
+// "stock watcher" S3 buckets now return 403 (retired mid-2025), and every
+// maintained feed requires either an API key or a CORS-enabled proxy. So the
+// dashboard renders the bundled sample dataset until a feed is configured.
+//
+// Recommended live sources (see README "Data sources & methods"):
+export const SOURCE_PRESETS = {
+  // Best single feed — both chambers, includes party, chamber & amount range.
+  // Needs `Authorization: Bearer <token>`; wrap in a proxy to add the header + CORS.
+  quiver: 'https://api.quiverquant.com/beta/bulk/congresstrading',
+  // Finnhub — generous free tier (60 req/min) but symbol-scoped; aggregate
+  // server-side, then serve the combined JSON to the browser.
+  finnhub: 'https://finnhub.io/api/v1/stock/congressional-trading?symbol={TICKER}&token={KEY}',
+  // Financial Modeling Prep — latest House/Senate disclosures (key required).
+  fmpHouse: 'https://financialmodelingprep.com/stable/house-latest?apikey={KEY}',
+  fmpSenate: 'https://financialmodelingprep.com/stable/senate-latest?apikey={KEY}',
+};
+
+// No default network calls — configure a feed via the overrides below.
+export const DEFAULT_SOURCES = [];
 
 function overrideSources() {
   try {
@@ -55,6 +64,12 @@ export function useCongressTrades({ live = true } = {}) {
 
   const load = useCallback(async () => {
     const sources = overrideSources() || DEFAULT_SOURCES;
+    // No feed configured — show the sample dataset without a spurious error.
+    if (!sources.length) {
+      setSource('seed');
+      setLoading(false);
+      return;
+    }
     if (inflight.current) inflight.current.abort();
     const ctrl = new AbortController();
     inflight.current = ctrl;

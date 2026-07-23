@@ -64,25 +64,58 @@ export function normalizeRecord(r, chamberHint) {
     return { ...r, id: r.id || `tx_auto_${autoId++}` };
   }
 
-  const member = cleanName(r.member || r.representative || r.senator || r.name || 'Unknown');
-  const chamber = r.chamber || chamberHint || (r.senator ? 'Senate' : r.representative ? 'House' : 'Unknown');
-  const amt = parseAmount(r.amountLabel || r.amount);
-  const transactionDate = normalizeDate(r.transactionDate || r.transaction_date);
-  const disclosureDate = normalizeDate(r.disclosureDate || r.disclosure_date);
+  // Field aliases span every supported vendor shape:
+  //   • Quiver Quantitative — Representative, Transaction, Range, Ticker,
+  //     TransactionDate, ReportDate, House ('Representatives'|'Senate'), Party
+  //   • Finnhub            — name, transactionType, amountFrom, amountTo,
+  //     symbol, transactionDate, filingDate, assetName, ownerType
+  //   • Financial Modeling Prep — firstName/lastName, office, type, amount,
+  //     symbol, transactionDate, disclosureDate, owner, assetDescription
+  //   • House/Senate "stock watcher" — representative/senator, ticker, amount,
+  //     type, transaction_date, disclosure_date, district
+  const fmpName = [r.firstName, r.lastName].filter(Boolean).join(' ');
+  const member = cleanName(
+    r.member || r.representative || r.senator || r.Representative || r.Senator || r.name || fmpName || 'Unknown'
+  );
+  const houseField = r.House || r.chamber || chamberHint;
+  const chamber =
+    houseField === 'Representatives' ? 'House'
+      : houseField || (r.senator || r.Senator ? 'Senate' : r.representative || r.Representative ? 'House' : 'Unknown');
+
+  // Amount can arrive as an explicit numeric range (Finnhub) or a bracket
+  // string (Quiver Range, FMP amount, stock-watcher amount).
+  let amt;
+  if (r.amountFrom != null || r.amountTo != null) {
+    const min = Number(r.amountFrom) || null;
+    const max = Number(r.amountTo) || null;
+    amt = { min, max, label: min != null && max != null ? `$${min.toLocaleString()} - $${max.toLocaleString()}` : 'Unknown' };
+  } else {
+    amt = parseAmount(r.amountLabel || r.amount || r.Range);
+  }
+
+  const transactionDate = normalizeDate(r.transactionDate || r.transaction_date || r.TransactionDate);
+  const disclosureDate = normalizeDate(
+    r.disclosureDate || r.disclosure_date || r.filingDate || r.ReportDate
+  );
   const district = r.district || '';
-  const state = r.state || (district && /^[A-Z]{2}/.test(district) ? district.slice(0, 2) : '');
+  const office = r.office || '';
+  const state =
+    r.state ||
+    (district && /^[A-Z]{2}/.test(district) ? district.slice(0, 2) : '') ||
+    (office && /^[A-Z]{2}\d/.test(office) ? office.slice(0, 2) : '');
+  const ownerRaw = r.owner || r.ownerType || '';
 
   return {
     id: r.id || `tx_auto_${autoId++}`,
     chamber,
     member,
-    party: partyCode(r.party),
+    party: partyCode(r.party || r.Party),
     state,
-    ticker: (r.ticker || '').toString().toUpperCase().replace(/^--$/, '') || null,
-    asset: r.asset || r.asset_description || '',
+    ticker: (r.ticker || r.symbol || r.Ticker || '').toString().toUpperCase().replace(/^--$/, '') || null,
+    asset: r.asset || r.asset_description || r.assetDescription || r.assetName || '',
     sector: r.sector || 'Unknown',
-    type: r.type || 'Unknown',
-    owner: r.owner ? r.owner[0].toUpperCase() + r.owner.slice(1) : 'Self',
+    type: r.type || r.transactionType || r.Transaction || 'Unknown',
+    owner: ownerRaw ? ownerRaw[0].toUpperCase() + ownerRaw.slice(1) : 'Self',
     amountLabel: amt.label,
     amountMin: amt.min,
     amountMax: amt.max,

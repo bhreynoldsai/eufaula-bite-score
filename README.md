@@ -66,25 +66,65 @@ transactions members of the U.S. Congress must disclose under the **STOCK Act**
 - **Sortable transactions table** and a **most-active-traders leaderboard**;
   clicking any member opens a detail drawer with their full trade history.
 
-### Data source
+### Data sources & methods
 
-The dashboard ships with a **bundled sample dataset**
-(`src/congress/data/seedTrades.json`) so it is fully functional offline — the
-members and tickers are real, but the individual transactions are synthetic and
-labelled *Sample data* in the UI. Regenerate it with:
+**How disclosure works.** Under the **STOCK Act (2012)**, members of Congress
+must file a **Periodic Transaction Report (PTR)** within **45 days** of a
+securities trade. Those filings are the raw material for every tracker.
+
+#### Primary (official, free, no key)
+
+| Source | What it gives you | Method | Trade-offs |
+|---|---|---|---|
+| **U.S. House Clerk** — `disclosures-clerk.house.gov` | Annual `‹YEAR›FD.zip` with an XML index of all filings; PTR PDFs at `/public_disc/ptr-pdfs/‹YEAR›/‹DocID›.pdf` | Download ZIP → parse `‹YEAR›FD.xml` → keep `FilingType = P` → fetch each PTR PDF | Authoritative & free, but transactions are in PDFs (newer are text, older are **scanned images needing OCR**) |
+| **U.S. Senate eFD** — `efdsearch.senate.gov` | Senate PTRs; electronic filings are structured HTML | POST to accept the terms agreement (grabs a CSRF cookie), then query `/search/report/data/` | Requires the terms/cookie handshake; paper filings are PDFs |
+
+A runnable implementation of the House-Clerk method ships at
+[`src/congress/data/ingest-house-clerk.mjs`](src/congress/data/ingest-house-clerk.mjs)
+(emits the PTR index; add a PDF/OCR step for line items). It needs outbound
+network access to the Clerk host.
+
+#### Structured third-party APIs (recommended for an app)
+
+These parse the primary sources for you and return clean JSON (member, party,
+chamber, ticker, type, amount range, dates). All require an API key and most
+require a small CORS-adding proxy for browser use.
+
+| Provider | Endpoint | Coverage / notes |
+|---|---|---|
+| **Quiver Quantitative** | `api.quiverquant.com/beta/bulk/congresstrading` (`Authorization: Bearer`) | **Best single feed** — both chambers, includes party, chamber & amount range |
+| **Finnhub** | `finnhub.io/api/v1/stock/congressional-trading?symbol=…&token=…` | Generous free tier (60 req/min) but **symbol-scoped** — aggregate server-side |
+| **Financial Modeling Prep** | `financialmodelingprep.com/stable/{house,senate}-latest?apikey=…` | Latest House/Senate disclosures |
+| **EODHD** (beta) | single congressional-trades JSON endpoint | Adds parsed numeric bounds, days-to-disclosure & a late-filing flag |
+
+> **Note on the old free feeds:** the community **House/Senate Stock Watcher**
+> S3 datasets that many tutorials reference are **retired** — the buckets now
+> return `403 AccessDenied` (last updated mid-2025). Don't build on them.
+
+The normalizer (`src/congress/data/normalize.js`) already understands the
+Quiver, Finnhub, FMP and stock-watcher field shapes, so any of the above works
+once you supply a URL.
+
+#### Wiring a live feed (no rebuild)
+
+The recommended presets live in `SOURCE_PRESETS`
+(`src/congress/hooks/useCongressTrades.js`). Point the app at your own
+(proxied, key-injecting) endpoint at runtime via either:
+
+- `?dataUrl=https://your-proxy.example/congress.json` in the address bar, or
+- `window.CONGRESS_DATA_URL = 'https://your-proxy.example/congress.json'` before load.
+
+A typical production setup is a tiny serverless function that calls Quiver or
+Finnhub with the secret key, normalizes/caches the result, and serves CORS-open
+JSON to the dashboard.
+
+#### Bundled sample data (default)
+
+Because no keyless, CORS-open feed exists anymore, the dashboard ships with a
+**bundled sample dataset** (`src/congress/data/seedTrades.json`) and renders it
+by default, flagged *Sample data* in the header. Members and tickers are real;
+the individual transactions are synthetic. Regenerate it with:
 
 ```bash
 node src/congress/data/generate.mjs
 ```
-
-At runtime the app also attempts to fetch **live** disclosure feeds *in the
-browser* (see `DEFAULT_SOURCES` in `src/congress/hooks/useCongressTrades.js`).
-Any feed returning an array of periodic-transaction records — the House/Senate
-"stock watcher" JSON shape is normalized automatically — works. Point it at a
-reachable feed without rebuilding:
-
-- add `?dataUrl=https://…/all_transactions.json` to the URL, or
-- set `window.CONGRESS_DATA_URL = 'https://…'` before the app loads.
-
-If no live feed is reachable, the dashboard falls back to the bundled sample
-data and flags the source in the header.
