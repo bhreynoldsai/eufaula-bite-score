@@ -62,15 +62,23 @@ describe('sunTimes', () => {
     expect(sunrise.getUTCHours()).toBeLessThanOrEqual(12);
   });
 
-  // KNOWN BUG (documented, not yet fixed): calcSolar computes the sunset time
-  // in 0–24h UT and stamps it on `date`'s calendar day. For our western
+  // Regression test for a fixed bug: calcSolar previously computed the event
+  // time in 0–24h UT and stamped it on `date`'s calendar day. For our western
   // longitude the evening sunset's UT falls just past midnight, so the sunset
-  // Date lands a full day early — making its timestamp earlier than sunrise in
-  // summer. This throws off isDuskWindow / isNight in buildConditions. `it.fails`
-  // keeps the suite green while pinning the expectation for when it's fixed.
-  it.fails('SHOULD return sunrise before sunset for a summer day', () => {
+  // Date landed a full day early — making its timestamp earlier than sunrise in
+  // summer and throwing off isDuskWindow / isNight in buildConditions. calcSolar
+  // now carries the UTC day offset, so sunrise precedes sunset as it should.
+  it('returns sunrise before sunset for a summer day', () => {
     const { sunrise, sunset } = sunTimes(new Date(2024, 5, 21, 12, 0));
     expect(sunrise.getTime()).toBeLessThan(sunset.getTime());
+  });
+
+  it('places the summer sunset in the evening local time (~19-21h CDT)', () => {
+    // 2024-06-21 sunset at Eufaula is ~19:50 CDT (00:50 UTC next day).
+    const { sunset } = sunTimes(new Date(2024, 5, 21, 12, 0));
+    const cdtHour = (sunset.getUTCHours() - 5 + 24) % 24; // CDT = UTC-5
+    expect(cdtHour).toBeGreaterThanOrEqual(19);
+    expect(cdtHour).toBeLessThanOrEqual(21);
   });
 });
 
