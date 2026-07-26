@@ -59,23 +59,41 @@ function calcSolar(date, isSunrise) {
   H = H / 15;
 
   const T = H + RA - 0.06571 * t - 6.622;
-  let UT = T - lngHour;
-  UT = ((UT % 24) + 24) % 24;
+  const utRaw = T - lngHour;
+  const UT = ((utRaw % 24) + 24) % 24;
+  // utRaw can land on an adjacent UTC day: for our western longitude the evening
+  // event's UT falls just past midnight, so wrapping to 0-24h without carrying
+  // the day would stamp the event ~24h early. Carry the day offset so the event
+  // is placed on the correct UTC calendar day.
+  const dayOffset = Math.round((utRaw - UT) / 24);
+
+  const hours = Math.floor(UT);
+  const minutes = Math.floor((UT - hours) * 60);
+  const seconds = Math.floor((((UT - hours) * 60) % 1) * 60);
 
   const result = new Date(Date.UTC(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate(),
-    Math.floor(UT),
-    Math.floor((UT - Math.floor(UT)) * 60),
-    Math.floor((((UT - Math.floor(UT)) * 60) % 1) * 60)
+    date.getDate() + dayOffset,
+    hours,
+    minutes,
+    seconds
   ));
   return result;
 }
 
 export function sunTimes(date = new Date()) {
   const sunrise = calcSolar(date, true);
-  const sunset = calcSolar(date, false);
+  let sunset = calcSolar(date, false);
+  // Sunset always follows sunrise. calcSolar returns each event's UTC
+  // time-of-day; for our western longitude the sunset's UT lands just past
+  // midnight (correct clock time locally, but one UTC day early), which would
+  // make the sunset instant precede sunrise. Nudge it forward a day so the
+  // absolute instants order correctly — this is what isDuskWindow / isNight
+  // in buildConditions rely on.
+  if (sunrise && sunset && sunset.getTime() <= sunrise.getTime()) {
+    sunset = new Date(sunset.getTime() + 24 * 60 * 60 * 1000);
+  }
   const civilDawn = sunrise ? new Date(sunrise.getTime() - 30 * 60000) : null;
   const civilDusk = sunset ? new Date(sunset.getTime() + 30 * 60000) : null;
   return { sunrise, sunset, civilDawn, civilDusk };
