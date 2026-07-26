@@ -38,6 +38,11 @@ flywheel into a durable moat.
 | 06 | [06-compliance.md](./06-compliance.md) | TCPA, AAPOR, FEC, state-law checklist |
 | 07 | [07-30-day-launch-plan.md](./07-30-day-launch-plan.md) | Week-by-week launch checklist |
 | 08 | [08-message-testing-product.md](./08-message-testing-product.md) | Productized persuasion / message-testing library spec |
+| 09 | [09-ai-model-selection.md](./09-ai-model-selection.md) | Standing AI model-selection policy (which Claude model for which task) |
+| 10 | [10-hiring-senior-quant.md](./10-hiring-senior-quant.md) | The "Shor seat" — senior quant/methodologist hiring spec + rubric |
+| 11 | [11-technical-pipeline-spec.md](./11-technical-pipeline-spec.md) | Build-ready pipeline spec: schemas, modules, MRP, sampling engine |
+| 12 | [12-procurement-plan.md](./12-procurement-plan.md) | Vendor outreach sequence + negotiation checklist |
+| 13 | [13-executive-brief.md](./13-executive-brief.md) | Shareable executive/investor brief |
 
 ---
 
@@ -65,7 +70,9 @@ flywheel into a durable moat.
 1. **No LLM "synthetic respondents" for published estimates.** Undiagnosable error,
    collapsed variance, stereotype amplification. AI is for pipeline automation,
    questionnaire drafting, open-end coding, and reporting — never for producing
-   published numbers.
+   published numbers. AI model selection is governed by a standing policy — match
+   the model to the job and always switch to the most effective model. See
+   [09-ai-model-selection.md](./09-ai-model-selection.md).
 2. **Never herd.** Report what the model says even when it is an outlier. Being
    right as the lonely outlier is what builds a reputation.
 3. **Radical transparency.** AAPOR Transparency Initiative from day one; publish

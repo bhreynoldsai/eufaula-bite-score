@@ -107,6 +107,9 @@ permanently sharpens the next model.
   field → weight → MRP → crosstab → dashboard end to end.
 - **AI assist, upstream only:** questionnaire drafting, open-end/verbatim coding,
   first-draft report narrative. **Never** for generating published estimates.
+  Model choice per task follows the standing policy in
+  [09-ai-model-selection.md](./09-ai-model-selection.md) (Opus 5 flagship /
+  Sonnet 5 workhorse / Haiku 4.5 + Batch API for bulk open-end coding).
 
 ---
 
