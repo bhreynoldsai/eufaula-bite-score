@@ -8,6 +8,7 @@
 
 export const TESTERS = [
   'dannyo31512@gmail.com',
+  'bernard@truenorth-inc.com',
 ];
 
 const normalize = (email) => (email || '').trim().toLowerCase();
