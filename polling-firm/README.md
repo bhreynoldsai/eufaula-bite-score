@@ -43,6 +43,7 @@ flywheel into a durable moat.
 | 11 | [11-technical-pipeline-spec.md](./11-technical-pipeline-spec.md) | Build-ready pipeline spec: schemas, modules, MRP, sampling engine |
 | 12 | [12-procurement-plan.md](./12-procurement-plan.md) | Vendor outreach sequence + negotiation checklist |
 | 13 | [13-executive-brief.md](./13-executive-brief.md) | Shareable executive/investor brief |
+| — | [prototype/](./prototype/) | **`pollcore`** — tested, working pipeline core validated vs. known ground truth (40 tests; naive error cut ~83% by weighting + MRP) |
 
 ---
 
@@ -62,6 +63,14 @@ flywheel into a durable moat.
   benchmark poll, full methodology disclosure, aggregator submission, brand launch.
 - **Phase 5 — Products & scale** — message-testing library, always-on tracking
   dashboards, cycle-over-cycle flywheel growth and public post-mortems.
+
+**Build-first track (in progress):** the [`prototype/`](./prototype/) package is a
+tested reference implementation of the modeling core — built and validated against
+known ground truth *before* any vendor or hire. It proves the methodology recovers
+truth (naive 5.1-pt bias → ~0.9 pt after weighting/MRP) and that the diagnostics
+gate rejects an unrecoverable sample. In production, its synthetic frame/fielding
+is swapped for the real voter file + multi-mode field; the modeling modules are
+unchanged.
 
 ---
 
