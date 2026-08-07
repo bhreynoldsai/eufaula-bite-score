@@ -14,6 +14,7 @@ import BiteScoreDashboard from './components/BiteScoreDashboard.jsx';
 import SolunarTimeline from './components/SolunarTimeline.jsx';
 import BiteExplanation from './components/BiteExplanation.jsx';
 import GuideAvatar from './components/GuideAvatar.jsx';
+import FishIcon from './components/FishIcon.jsx';
 
 const SPECIES_NAMES = { largemouth: 'Largemouth Bass', crappie: 'Crappie', catfish: 'Catfish' };
 const ZONE_NAMES = { upper: 'Upper River', mid: 'Mid Lake', deep: 'Lower Dam' };
@@ -162,7 +163,7 @@ export default function App() {
               <GuideAvatar size={72} hideIfMissing />
               <h1 className="font-display text-2xl sm:text-3xl font-bold text-heading uppercase tracking-wider">
                 Danny's <span className="text-accent">Eufaula Bites</span>{' '}
-                <span aria-hidden="true" className="inline-block text-4xl sm:text-5xl align-middle">🐟</span>
+                <FishIcon size={48} className="inline-block align-middle text-accent" />
               </h1>
             </div>
             <div className="text-xs text-body/70">
