@@ -1,0 +1,11 @@
+{
+  "appId": "com.eufaulabites.app",
+  "appName": "Eufaula Bites",
+  "webDir": "dist",
+  "server": {
+    "iosScheme": "https"
+  },
+  "ios": {
+    "contentInset": "always"
+  }
+}
