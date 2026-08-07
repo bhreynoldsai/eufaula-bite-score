@@ -161,7 +161,8 @@ export default function App() {
             <div className="flex items-center gap-3">
               <GuideAvatar size={72} hideIfMissing />
               <h1 className="font-display text-2xl sm:text-3xl font-bold text-heading uppercase tracking-wider">
-                Danny's <span className="text-accent">Eufaula Bites</span>
+                Danny's <span className="text-accent">Eufaula Bites</span>{' '}
+                <span aria-hidden="true">🐟</span>
               </h1>
             </div>
             <div className="text-xs text-body/70">
